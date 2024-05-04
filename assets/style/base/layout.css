@@ -24,3 +24,38 @@
 .content-grid > .full {
     grid-column: 1 / -1;
 }
+
+header {
+    display: grid;
+    margin-inline-start: 1em;
+    margin-block-start: 1em;
+    row-gap: 1em;
+}
+
+header nav {
+    display: grid;
+    grid-auto-flow: column;
+    margin-block-end: 2em;
+    background-color: gray;
+    width: 100vw;
+}
+
+nav a {
+    text-decoration: none;
+    font-size: small;
+    text-align: center;
+    margin-inline-end: 1em;
+    border-radius: 5px;
+    color: rgb(246, 237, 219);
+
+    padding: 0.3em;
+}
+
+nav a.clicked {
+    background-color: rgb(128, 128, 128);
+}
+
+nav a:hover {
+    background-color: rgb(151, 151, 151);
+    /* box-shadow: 0.5px 0.5px 7px 1px #d9dee3; */
+}

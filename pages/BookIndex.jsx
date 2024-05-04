@@ -1,6 +1,10 @@
-import { BookList } from "../cmps/BookList.jsx";
-import { bookService } from "../services/book.service.js";
+const { useState, useEffect } = React
+
+import { bookService } from "../services/book.service.js"
 import { utilService } from "../services/util.service.js"
+
+import { BookList } from "../cmps/BookList.jsx"
+
 
 
 export function BookIndex() {
@@ -16,10 +20,10 @@ export function BookIndex() {
                 isOnSale: false
             },
             subtitle: "L’Espoir, la Foi et le Courage",
-            authors: [ "Barbara Cartland" ],
+            authors: ["Barbara Cartland"],
             publishedDate: 1997,
             pageCount: 713,
-            categories: [ "Motivation", "Biography" ],
+            categories: ["Motivation", "Biography"],
             language: "en"
         },
         {
@@ -33,10 +37,10 @@ export function BookIndex() {
                 isOnSale: true
             },
             subtitle: "mi est eros dapibus himenaeos",
-            authors: [ "Esther Schwartz" ],
+            authors: ["Esther Schwartz"],
             publishedDate: 1999,
             pageCount: 412,
-            categories: [ "Stocks", "Finance" ],
+            categories: ["Stocks", "Finance"],
             language: "en"
         },
         {
@@ -50,23 +54,26 @@ export function BookIndex() {
                 isOnSale: false
             },
             subtitle: "Low-Carbon society - Information and Communication Technology (ICT).",
-            authors: [ "Jade Band" ],
+            authors: ["Jade Band"],
             publishedDate: 2012,
             pageCount: 390,
-            categories: [ "Gardening", "Home" ],
+            categories: ["Gardening", "Home"],
             language: "en"
         }
     ]
     // utilService.saveToStorage('booksDB', demo)
 
-    const books = bookService.query()
+    const [ books, setBooks ] = useState(demo)
+
+    useEffect(() => {
+        bookService.query()
+            .then(books => setBooks(books))
+    }, [])
 
     console.log('books:', books)
 
-
     return <section className="books">
         <h1>Books</h1>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam sunt ducimus consectetur.</p>
         <BookList books={books} />
     </section>
 }

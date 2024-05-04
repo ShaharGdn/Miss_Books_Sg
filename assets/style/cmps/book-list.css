@@ -1,0 +1,36 @@
+.books > *{
+    margin-block-end: 1em;
+}
+
+.book-list {
+    margin-inline-start: 1em;
+}
+
+.book-list table {
+    background-color: #f3e6e6;
+}
+
+.book-list table th{
+    text-align: start;
+}
+
+.book-list table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 8px;
+}
+
+.book-list tr:nth-child(even) {
+    background-color: #e5e0e0bc;
+    color: rgb(0, 0, 0);
+}
+
+.book-list thead {
+    background-color: #b5afaf;
+    color: white;
+
+}
+
+.book-list table img {
+    width: 100px;
+}
