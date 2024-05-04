@@ -22,13 +22,13 @@ export const bookService = {
 function query(filterBy = {}) {
     return storageService.query(BOOK_KEY)
         .then(books => {
-            if (filterBy.txt) {
-                const regExp = new RegExp(filterBy.txt, 'i')
-                books = books.filter(book => regExp.test(book.vendor))
+            if (filterBy.title) {
+                const regExp = new RegExp(filterBy.title, 'i')
+                books = books.filter(book => regExp.test(book.title))
             }
 
-            if (filterBy.minSpeed) {
-                books = books.filter(book => book.maxSpeed >= filterBy.minSpeed)
+            if (filterBy.maxPrice) {
+                books = books.filter(book => book.listPrice.amount <= filterBy.maxPrice)
             }
 
             return books
@@ -59,8 +59,8 @@ function getEmptybook(vendor = '', maxSpeed = '') {
     return { vendor, maxSpeed }
 }
 
-function getDefaultFilter(filterBy = { txt: '', minSpeed: 0 }) {
-    return { txt: filterBy.txt, minSpeed: filterBy.minSpeed }
+function getDefaultFilter(filterBy = { title: '', maxPrice: 0 }) {
+    return { title: filterBy.title, maxPrice: filterBy.maxPrice }
 }
 
 function getSpeedStats() {

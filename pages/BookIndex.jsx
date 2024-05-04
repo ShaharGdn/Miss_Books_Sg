@@ -5,6 +5,7 @@ import { utilService } from "../services/util.service.js"
 
 import { BookList } from "../cmps/BookList.jsx"
 import { BookDetails } from "../cmps/BookDetails.jsx"
+import { BookFilter } from "../cmps/BookFilter.jsx"
 
 export function BookIndex() {
     const demo = [
@@ -63,27 +64,32 @@ export function BookIndex() {
     // utilService.saveToStorage('booksDB', demo)
 
     const [ books, setBooks ] = useState(demo)
+    const [ filterBy, setFilterBy ] = useState(bookService.getDefaultFilter())
     const [ selectedBook, setSelectedBook ] = useState(null)
 
+    function onSetFilterBy(newFilter) {
+        setFilterBy(newFilter)
+    }
 
     useEffect(() => {
-        bookService.query()
+        bookService.query(filterBy)
             .then(books => setBooks(books))
-    }, [])
-
-    function showBookDetails(book) {
-        setSelectedBook(book)
-    }
+    }, [filterBy])
 
     function removeBook(bookId) {
         bookService.remove(bookId)
             .then(() => setBooks(prevBooks => prevBooks.filter(book => book.id !== bookId)))
     }
 
-    console.log('books:', books)
+
+    function showBookDetails(book) {
+        setSelectedBook(book)
+    }
 
     return <section className="books">
         <h1>Books</h1>
+
+        <BookFilter filterBy={filterBy} onFilter={onSetFilterBy}/>
         {!selectedBook && <BookList books={books} onRemove={removeBook} onShowDetails={showBookDetails}/>}
         {selectedBook && <BookDetails book={selectedBook} onClose={() => setSelectedBook(null)} />}
     </section>
