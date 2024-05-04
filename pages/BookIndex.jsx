@@ -1,3 +1,4 @@
+import { BookList } from "../cmps/BookList.jsx";
 import { bookService } from "../services/book.service.js";
 import { utilService } from "../services/util.service.js"
 
@@ -66,5 +67,6 @@ export function BookIndex() {
     return <section className="books">
         <h1>Books</h1>
         <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam sunt ducimus consectetur.</p>
+        <BookList books={books} />
     </section>
 }
