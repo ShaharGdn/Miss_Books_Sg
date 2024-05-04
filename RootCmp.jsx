@@ -6,7 +6,7 @@ const { useState } = React
 
 export function RootCmp() {
 
-    const [ route, setRoute ] = useState('About')
+    const [ route, setRoute ] = useState('Books')
 
     return (
         <React.Fragment>
