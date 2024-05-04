@@ -4,8 +4,7 @@ import { bookService } from "../services/book.service.js"
 import { utilService } from "../services/util.service.js"
 
 import { BookList } from "../cmps/BookList.jsx"
-
-
+import { BookDetails } from "../cmps/BookDetails.jsx"
 
 export function BookIndex() {
     const demo = [
@@ -64,16 +63,28 @@ export function BookIndex() {
     // utilService.saveToStorage('booksDB', demo)
 
     const [ books, setBooks ] = useState(demo)
+    const [ selectedBook, setSelectedBook ] = useState(null)
+
 
     useEffect(() => {
         bookService.query()
             .then(books => setBooks(books))
     }, [])
 
+    function showBookDetails(book) {
+        setSelectedBook(book)
+    }
+
+    function removeBook(bookId) {
+        bookService.remove(bookId)
+            .then(() => setBooks(prevBooks => prevBooks.filter(book => book.id !== bookId)))
+    }
+
     console.log('books:', books)
 
     return <section className="books">
         <h1>Books</h1>
-        <BookList books={books} />
+        {!selectedBook && <BookList books={books} onRemove={removeBook} onShowDetails={showBookDetails}/>}
+        {selectedBook && <BookDetails book={selectedBook} onClose={() => setSelectedBook(null)} />}
     </section>
 }

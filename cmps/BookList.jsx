@@ -1,7 +1,6 @@
 import { BookPreview } from "./BookPreview.jsx";
 
-export function BookList({ books }) {
-
+export function BookList({ books, onRemove, onShowDetails}) {
     return <section className="book-list">
         <table>
             <thead>
@@ -10,16 +9,10 @@ export function BookList({ books }) {
                     <th>Price</th>
                     <th>Author</th>
                     <th>Thumbnail</th>
+                    <th>Delete</th>
+                    <th>Details</th>
                 </tr>
-                {<BookPreview books={books}/>}
-                {/* {books.map(book => {
-                        return  <tr>
-                            <td>{book.title}</td>
-                            <td>{book.listPrice.amount}</td>
-                            <td>{book.authors}</td>
-                            <td><img src={book.thumbnail}/></td>
-                        </tr>
-                    })} */}
+                {<BookPreview books={books} onRemove={onRemove} onShowDetails={onShowDetails}/>}
             </thead>
         </table>
     </section>
