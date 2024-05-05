@@ -1,20 +1,9 @@
-export function BookPreview({ books, onRemove, onShowDetails }) {
-    {
-        return books.map(book => {
-            return <tr>
-                <td>{book.title}</td>
-                <td>{book.listPrice.amount}</td>
-                <td>{book.authors}</td>
-                <td>
-                    <img src={book.thumbnail} />
-                </td>
-                <td>
-                    <button onClick={() => onRemove(book.id)}>x</button>
-                </td>
-                <td>
-                    <button onClick={() => onShowDetails(book)}>Details</button>
-                </td>
-            </tr>
-        })
-    }
+export function BookPreview({ book }) {
+    return <article className="book-preview">
+        <h3>{book.title}</h3>
+        <span>{book.listPrice.amount} {book.listPrice.currencyCode}</span>
+        <span>{book.authors}</span>
+        <p>{book.description}</p>
+        <img src={book.thumbnail} alt="thumbnail of a book" />
+    </article>
 }

@@ -1,0 +1,8 @@
+.book-preview {
+    display: grid;
+}
+
+.book-preview img {
+    justify-self: center;
+    max-width: 80%;
+}

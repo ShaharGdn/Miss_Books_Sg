@@ -2,35 +2,37 @@
     margin-block-end: 1em;
 }
 
-.book-list {
-    margin-inline-start: 1em;
+.book-list ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
 }
 
-.book-list table {
-    background-color: #f3e6e6;
+.book-list ul li {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
 }
 
-.book-list table th{
-    text-align: start;
+.book-list ul li button {
+    grid-row: 3;
 }
 
-.book-list table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-    padding: 8px;
+.book-list ul li button {
+    margin-top: auto;
+    min-width: 4em;
+    min-height: 2em;
+    background-color: #fff;
+    border: none;
+    border-radius: 3px;
+    margin-block-start: 1em;
 }
 
-.book-list tr:nth-child(even) {
-    background-color: #e5e0e0bc;
-    color: rgb(0, 0, 0);
+.book-list li {
+    padding: 10px;
+    background-color: lightblue;
+    column-gap: 1em;
 }
 
-.book-list thead {
-    background-color: #b5afaf;
-    color: white;
-
-}
-
-.book-list table img {
-    width: 100px;
+.book-list article {
+    grid-column: 1 /span 2;
 }

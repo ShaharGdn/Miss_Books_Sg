@@ -8,5 +8,7 @@
 @import "base/layout.css";
 
 /* Components */
+@import "cmps/book-details.css";
+@import "cmps/book-preview.css";
 @import "cmps/book-list.css";
 
