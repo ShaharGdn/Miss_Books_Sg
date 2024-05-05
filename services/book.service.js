@@ -10,14 +10,16 @@ export const bookService = {
     remove,
     save,
     getEmptybook,
+    _createbooks,
+    _createbook,
     getDefaultFilter,
     getSpeedStats,
     getVendorStats,
     _setNextPrevBookId,
-    _getBookCountByVendorMap
+    _getBookCountByVendorMap,
 }
 // For Debug (easy access from console):
-// window.cs = bookService
+window.cs = bookService
 
 function query(filterBy = {}) {
     return storageService.query(BOOK_KEY)
@@ -90,19 +92,56 @@ function getVendorStats() {
 function _createbooks() {
     let books = utilService.loadFromStorage(BOOK_KEY)
     if (!books || !books.length) {
-        books = []
-        const vendors = ['audu', 'fiak', 'subali', 'mitsu']
-        for (let i = 0; i < 6; i++) {
-            const vendor = vendors[utilService.getRandomIntInclusive(0, vendors.length - 1)]
-            books.push(_createbook(vendor, utilService.getRandomIntInclusive(80, 300)))
+        const ctgs = ['Love', 'Fiction', 'Poetry', 'Computers', 'Religion']
+        const books = []
+        for (let i = 0; i < 20; i++) {
+            const book = {
+                id: utilService.makeId(),
+                title: utilService.makeLorem(2),
+                subtitle: utilService.makeLorem(4),
+                authors: [utilService.makeLorem(1)],
+                publishedDate: utilService.getRandomIntInclusive(1950, 2024),
+                description: utilService.makeLorem(20),
+                pageCount: utilService.getRandomIntInclusive(20, 600),
+                categories: [ctgs[utilService.getRandomIntInclusive(0, ctgs.length - 1)]],
+                thumbnail: `http://coding-academy.org/books-photos/${i + 1}.jpg`,
+                language: "en", listPrice: {
+                    amount: utilService.getRandomIntInclusive(80, 500),
+                    currencyCode: "EUR",
+                    isOnSale: Math.random() > 0.7
+                }
+            }
+            books.push(book)
         }
+        console.log('books', books)
         utilService.saveToStorage(BOOK_KEY, books)
     }
+    return books
 }
 
-function _createbook(vendor, maxSpeed = 250) {
-    const book = getEmptybook(vendor, maxSpeed)
-    book.id = utilService.makeId()
+function _createbook(formData) {
+    
+    const { title, price, authors, pagesCount, publishDate, language } = formData;
+    const ctgs = ['Love', 'Fiction', 'Poetry', 'Computers', 'Religion']
+
+    const book = {
+        id: utilService.makeId(),
+        // title: utilService.makeLorem(2),
+        title: title ? title : utilService.makeLorem(2),
+        subtitle: utilService.makeLorem(4),
+        authors: authors ? [authors] : [utilService.makeLorem(1)],
+        publishedDate: publishDate ? parseInt(publishDate, 10) : utilService.getRandomIntInclusive(1950, 2024),
+        description: utilService.makeLorem(20),
+        pageCount: utilService.getRandomIntInclusive(20, 600),
+        categories: [ctgs[utilService.getRandomIntInclusive(0, ctgs.length - 1)]],
+        thumbnail: `http://coding-academy.org/books-photos/${utilService.getRandomIntInclusive(1, 20) + 1}.jpg`,
+        language: language ? language : 'Unknown',
+        listPrice: {
+            amount: price ? parseFloat(price) : utilService.getRandomIntInclusive(80, 500),
+            currencyCode: "EUR",
+            isOnSale: Math.random() > 0.7
+        }
+    }
     return book
 }
 
