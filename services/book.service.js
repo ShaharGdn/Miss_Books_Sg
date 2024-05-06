@@ -63,7 +63,7 @@ function getEmptybook(formData = null) {
         title: '',
         price: '',
         authors: '',
-        pagesCount: '',
+        pageCount: '',
         publishDate: '',
         language: ''
     }
@@ -113,7 +113,8 @@ function _createbooks() {
                 pageCount: utilService.getRandomIntInclusive(20, 600),
                 categories: [ctgs[utilService.getRandomIntInclusive(0, ctgs.length - 1)]],
                 thumbnail: `http://coding-academy.org/books-photos/${i + 1}.jpg`,
-                language: "en", listPrice: {
+                language: "en", 
+                listPrice: {
                     amount: utilService.getRandomIntInclusive(80, 500),
                     currencyCode: "EUR",
                     isOnSale: Math.random() > 0.7
@@ -138,7 +139,7 @@ function _createbook(formData = null) {
         authors: authors ? [authors] : [utilService.makeLorem(1)],
         publishedDate: publishDate ? parseInt(publishDate, 10) : utilService.getRandomIntInclusive(1950, 2024),
         description: utilService.makeLorem(20),
-        pagesCount: pagesCount? pagesCount : utilService.getRandomIntInclusive(20, 600),
+        pageCount: pagesCount? pagesCount : utilService.getRandomIntInclusive(20, 600),
         categories: [ctgs[utilService.getRandomIntInclusive(0, ctgs.length - 1)]],
         thumbnail: `http://coding-academy.org/books-photos/${utilService.getRandomIntInclusive(1, 20)}.jpg`,
         language: language ? language : 'Unknown',
