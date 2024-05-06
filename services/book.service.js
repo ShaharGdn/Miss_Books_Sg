@@ -32,7 +32,6 @@ function query(filterBy = {}) {
             if (filterBy.maxPrice) {
                 books = books.filter(book => book.listPrice.amount <= filterBy.maxPrice)
             }
-
             return books
         })
 }
@@ -57,8 +56,17 @@ function save(book) {
     }
 }
 
-function getEmptybook(vendor = '', maxSpeed = '') {
-    return { vendor, maxSpeed }
+function getEmptybook(formData = null) {
+    if (formData) return _createbook(formData) 
+
+    else return {
+        title: '',
+        price: '',
+        authors: '',
+        pagesCount: '',
+        publishDate: '',
+        language: ''
+    }
 }
 
 function getDefaultFilter(filterBy = { title: '', maxPrice: 0 }) {
@@ -113,28 +121,26 @@ function _createbooks() {
             }
             books.push(book)
         }
-        console.log('books', books)
         utilService.saveToStorage(BOOK_KEY, books)
     }
     return books
 }
 
-function _createbook(formData) {
+function _createbook(formData = null) {
     
-    const { title, price, authors, pagesCount, publishDate, language } = formData;
+    const { title, price, authors, pagesCount, publishDate, language } = formData
     const ctgs = ['Love', 'Fiction', 'Poetry', 'Computers', 'Religion']
 
     const book = {
         id: utilService.makeId(),
-        // title: utilService.makeLorem(2),
         title: title ? title : utilService.makeLorem(2),
         subtitle: utilService.makeLorem(4),
         authors: authors ? [authors] : [utilService.makeLorem(1)],
         publishedDate: publishDate ? parseInt(publishDate, 10) : utilService.getRandomIntInclusive(1950, 2024),
         description: utilService.makeLorem(20),
-        pageCount: utilService.getRandomIntInclusive(20, 600),
+        pagesCount: pagesCount? pagesCount : utilService.getRandomIntInclusive(20, 600),
         categories: [ctgs[utilService.getRandomIntInclusive(0, ctgs.length - 1)]],
-        thumbnail: `http://coding-academy.org/books-photos/${utilService.getRandomIntInclusive(1, 20) + 1}.jpg`,
+        thumbnail: `http://coding-academy.org/books-photos/${utilService.getRandomIntInclusive(1, 20)}.jpg`,
         language: language ? language : 'Unknown',
         listPrice: {
             amount: price ? parseFloat(price) : utilService.getRandomIntInclusive(80, 500),
