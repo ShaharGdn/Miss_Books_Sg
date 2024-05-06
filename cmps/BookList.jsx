@@ -1,3 +1,5 @@
+import { bookService } from "../services/book.service.js"
+
 import { BookPreview } from "./BookPreview.jsx";
 
 export function BookList({ books, onRemove, onShowDetails}) {

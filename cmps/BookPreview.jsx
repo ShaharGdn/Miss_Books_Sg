@@ -1,3 +1,5 @@
+import { bookService } from "../services/book.service.js"
+
 export function BookPreview({ book }) {
     return <article className="book-preview">
         <h3>{book.title}</h3>
@@ -6,4 +8,4 @@ export function BookPreview({ book }) {
         <p>{book.description}</p>
         <img src={book.thumbnail} alt="thumbnail of a book" />
     </article>
-}
+}   
