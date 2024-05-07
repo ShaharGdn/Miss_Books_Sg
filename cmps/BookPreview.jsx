@@ -6,7 +6,6 @@ export function BookPreview({ book }) {
         <h3>{book.title}</h3>
         <span>{book.listPrice.amount} {book.listPrice.currencyCode}</span>
         <span>{book.authors}</span>
-        {/* <p>{book.description}</p> */}
         <span>{<LongTxt length={50} txt={book.description} />}</span>
         <img src={book.thumbnail} alt="thumbnail of a book" />
     </article>
