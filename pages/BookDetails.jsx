@@ -1,13 +1,38 @@
-import { bookService } from "../services/book.service.js"
-import { LongTxt } from "./LongTxt.jsx"
-
 const { useState, useEffect } = React
+const { useParams, useNavigate } = ReactRouter
 
-export function BookDetails({ book, onClose }) {
+const { Link } = ReactRouterDOM
+
+import { LongTxt } from "../cmps/LongTxt.jsx"
+import { bookService } from "../services/book.service.js"
+
+export function BookDetails() {
+    const [ book, setBook ] = useState(null)
+    const [ isLoading, setIsLoading ] = useState(true)
+
+    const params = useParams()
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        setIsLoading(true)
+        bookService.get(params.bookId)
+            .then(book => {
+                setBook(book)
+            })
+            .catch(() => {
+                alert('Couldnt get book...')
+                navigate('/book')
+            })
+            .finally(() => {
+                setIsLoading(false)
+            })
+    }, [params.bookId])
+
+    if (!book) return
+    
     const currYear = (new Date()).getFullYear()
     const yearsDiff = currYear - book.publishedDate
     
-
     function textLengthTags() {
         return book.pageCount > 500 ? 'Serious Reading'
             : book.pageCount > 200 ? 'Descent Reading'
@@ -20,6 +45,7 @@ export function BookDetails({ book, onClose }) {
             : 'black'
     }
 
+    if(isLoading) return <h3>Loading...</h3>
     return <section className="book-details">
         <h3>Title: {book.title}</h3>
         <h4>Subtitle: {book.subtitle}</h4>
@@ -34,6 +60,11 @@ export function BookDetails({ book, onClose }) {
         <p>Language: {book.language}</p>
         {<LongTxt txt={book.description} />}
         <img src={book.thumbnail} alt="" />
-        <button onClick={onClose}>x</button>
+
+        <section className="actions">
+            <Link to={`/book/${book.prevBookId}`}><button>Prev</button></Link>
+            <Link to={`/book/${book.nextBookId}`}><button>Next</button></Link>
+            <Link to="/book"><button>x</button></Link>
+        </section>
     </section>
 }

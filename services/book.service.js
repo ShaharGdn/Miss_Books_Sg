@@ -39,7 +39,7 @@ function query(filterBy = {}) {
 function get(bookId) {
     return storageService.get(BOOK_KEY, bookId)
         .then(book => {
-            book = _setNextprevBookId(book)
+            book = _setNextPrevBookId(book)
             return book
         })
 }
@@ -56,17 +56,25 @@ function save(book) {
     }
 }
 
-function getEmptybook(formData = null) {
-    if (formData) return _createbook(formData) 
-
-    else return {
-        title: '',
-        price: '',
-        authors: '',
+function getEmptybook() {
+    const book = {
+        id: '',
+        title : '',
+        subtitle: '',
+        authors : '',
+        publishedDate: '',
+        description: '',
         pageCount: '',
-        publishDate: '',
-        language: ''
+        categories: '',
+        thumbnail: `http://coding-academy.org/books-photos/${utilService.getRandomIntInclusive(1, 20)}.jpg`,
+        language: '',
+        listPrice: {
+            amount: '',
+            currencyCode: '',
+            isOnSale: Math.random() > 0.7
+        }
     }
+    return book
 }
 
 function getDefaultFilter(filterBy = { title: '', maxPrice: 0 }) {
@@ -127,24 +135,22 @@ function _createbooks() {
     return books
 }
 
-function _createbook(formData = null) {
-    
-    const { title, price, authors, pagesCount, publishDate, language } = formData
+function _createbook() {
     const ctgs = ['Love', 'Fiction', 'Poetry', 'Computers', 'Religion']
 
     const book = {
         id: utilService.makeId(),
-        title: title ? title : utilService.makeLorem(2),
+        title : utilService.makeLorem(2),
         subtitle: utilService.makeLorem(4),
-        authors: authors ? [authors] : [utilService.makeLorem(1)],
-        publishedDate: publishDate ? parseInt(publishDate, 10) : utilService.getRandomIntInclusive(1950, 2024),
+        authors : [utilService.makeLorem(1)],
+        publishedDate: utilService.getRandomIntInclusive(1950, 2024),
         description: utilService.makeLorem(20),
-        pageCount: pagesCount? pagesCount : utilService.getRandomIntInclusive(20, 600),
+        pageCount: utilService.getRandomIntInclusive(20, 600),
         categories: [ctgs[utilService.getRandomIntInclusive(0, ctgs.length - 1)]],
         thumbnail: `http://coding-academy.org/books-photos/${utilService.getRandomIntInclusive(1, 20)}.jpg`,
-        language: language ? language : 'Unknown',
+        language: 'Unknown',
         listPrice: {
-            amount: price ? parseFloat(price) : utilService.getRandomIntInclusive(80, 500),
+            amount: utilService.getRandomIntInclusive(80, 500),
             currencyCode: "EUR",
             isOnSale: Math.random() > 0.7
         }
@@ -152,9 +158,36 @@ function _createbook(formData = null) {
     return book
 }
 
+// function _createbook(formData = null) {
+//     console.log('formData:', formData)
+    
+//     const { title, price, authors, pagesCount, publishDate, language } = formData
+//     const ctgs = ['Love', 'Fiction', 'Poetry', 'Computers', 'Religion']
+
+//     const book = {
+//         id: utilService.makeId(),
+//         title: title ? title : utilService.makeLorem(2),
+//         subtitle: utilService.makeLorem(4),
+//         authors: authors ? [authors] : [utilService.makeLorem(1)],
+//         publishedDate: publishDate ? parseInt(publishDate, 10) : utilService.getRandomIntInclusive(1950, 2024),
+//         description: utilService.makeLorem(20),
+//         pageCount: pagesCount? pagesCount : utilService.getRandomIntInclusive(20, 600),
+//         categories: [ctgs[utilService.getRandomIntInclusive(0, ctgs.length - 1)]],
+//         thumbnail: `http://coding-academy.org/books-photos/${utilService.getRandomIntInclusive(1, 20)}.jpg`,
+//         language: language ? language : 'Unknown',
+//         listPrice: {
+//             amount: price ? parseFloat(price) : utilService.getRandomIntInclusive(80, 500),
+//             currencyCode: "EUR",
+//             isOnSale: Math.random() > 0.7
+//         }
+//     }
+//     return book
+// }
+
+
 function _setNextPrevBookId(book) {
     return storageService.query(BOOK_KEY).then((books) => {
-        const bookIdx = books.findIndex((currbook) => currbook.id === book.id)
+        const bookIdx = books.findIndex((currBook) => currBook.id === book.id)
         const nextBook = books[bookIdx + 1] ? books[bookIdx + 1] : books[0]
         const prevBook = books[bookIdx - 1] ? books[bookIdx - 1] : books[books.length - 1]
         book.nextBookId = nextBook.id

@@ -16,7 +16,7 @@ export function BookFilter({ filterBy, onFilter }) {
         setFilterByToEdit(prevFilterBy => ({ ...prevFilterBy, [name]: value }))
     }
 
-    return <section className="car-filter">
+    return <section className="book-filter">
         <h3>Filter</h3>
 
         <input onChange={handleChange} autoFocus name="title" type="text" placeholder="Title"/>

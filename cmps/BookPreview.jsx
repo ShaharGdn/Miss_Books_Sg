@@ -1,4 +1,3 @@
-import { bookService } from "../services/book.service.js"
 import { LongTxt } from "./LongTxt.jsx"
 
 export function BookPreview({ book }) {
