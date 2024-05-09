@@ -36,8 +36,13 @@ function put(entityType, updatedEntity) {
         const entityToUpdate = {...entities[idx], ...updatedEntity}
         entities.splice(idx, 1, entityToUpdate)
         _save(entityType, entities)
+        console.log('updatedEntity:', updatedEntity)
         return updatedEntity
     })
+}
+
+function _updatePrice(entity) {
+    entity.listPriceentity.price
 }
 
 function remove(entityType, entityId) {

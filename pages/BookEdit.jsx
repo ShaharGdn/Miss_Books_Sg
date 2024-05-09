@@ -33,6 +33,17 @@ export function BookEdit() {
                 value = target.checked
                 break;
         }
+
+        if (prop === 'price') {
+            setBook(prevBook => ({
+                ...prevBook,
+                listPrice: {
+                    ...prevBook.listPrice,
+                    amount: value
+                }
+            }))
+        }
+
         setBook(prevBook => ({ ...prevBook, [prop]: value }))
     }
 
@@ -45,7 +56,7 @@ export function BookEdit() {
                 navigate('/book')
             })
     }
-    
+
     return (
         <dialog ref={currRef} open type="modal" className="bookEdit">
             <span>{book ? book.title : 'New Book'}</span>
@@ -54,7 +65,7 @@ export function BookEdit() {
                 <input type="number" name="price" placeholder="Price" value={book.price} onChange={handleChange} />
                 <input type="text" name="authors" placeholder="Author" value={book.authors} onChange={handleChange} />
                 <input type="number" name="pageCount" placeholder="Pages" value={book.pageCount} onChange={handleChange} />
-                <input type="number" name="publishDate" placeholder="Published (YYYY)" value={book.publishDate} onChange={handleChange} />
+                <input type="number" name="publishedDate" placeholder="Published (YYYY)" value={book.publishedDate} onChange={handleChange} />
                 <input type="text" name="language" placeholder="Language" value={book.language} onChange={handleChange} />
                 <button>Add</button>
             </form>

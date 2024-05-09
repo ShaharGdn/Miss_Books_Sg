@@ -55,7 +55,7 @@ export function BookDetails() {
         {yearsDiff > 10 && <p>Vintage</p>}
         {yearsDiff < 1 && <p>New</p>}
         <p>Categories: {book.categories.map(category => <span>{category} </span>)}</p>
-        <p style={{ color: bookPriceColor() }}><span style={{ color: 'black' }}>Price: </span>{book.listPrice.amount} {book.listPrice.currencyCode}</p>
+        <p style={{ color: bookPriceColor() }}><span style={{ color: 'black' }}>Price: </span>{book.price} {book.listPrice.currencyCode}</p>
         <p>Pages: {book.pageCount}</p>
         <p>Language: {book.language}</p>
         {<LongTxt txt={book.description} />}

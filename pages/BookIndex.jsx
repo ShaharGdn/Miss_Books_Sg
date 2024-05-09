@@ -12,8 +12,6 @@ import { BookEdit } from "./BookEdit.jsx"
 export function BookIndex() {
     const [books, setBooks] = useState([])
     const [filterBy, setFilterBy] = useState(bookService.getDefaultFilter())
-    const [selectedBook, setSelectedBook] = useState(null)
-    const [isAddEdit, setEditor] = useState(false)
 
     useEffect(() => {
         bookService.query()
@@ -32,15 +30,6 @@ export function BookIndex() {
     function removeBook(bookId) {
         bookService.remove(bookId)
             .then(() => setBooks(prevBooks => prevBooks.filter(book => book.id !== bookId)))
-    }
-
-    function onAddEditBook() {
-        setEditor(true)
-    }
-
-    function onAddBook(formData) {
-        const newBook = bookService.getEmptybook(formData)
-        addBook(newBook)
     }
 
     function addBook(newBook) {
