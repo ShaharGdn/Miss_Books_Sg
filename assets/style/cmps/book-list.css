@@ -1,38 +1,39 @@
-.books > *{
+.books>* {
     margin-block-end: 1em;
 }
 
 .book-list ul {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 10px;
 }
 
 .book-list ul li {
     display: grid;
-    grid-template-rows: auto 1fr auto;
-}
-
-.book-list ul li button {
-    grid-row: 3;
-}
-
-.book-list ul li button {
-    margin-top: auto;
-    min-width: 4em;
-    min-height: 2em;
-    background-color: #fff;
-    border: none;
-    border-radius: 3px;
-    margin-block-start: 1em;
-}
-
-.book-list li {
     padding: 10px;
-    background-color: lightblue;
-    column-gap: 1em;
+    column-gap: 2em;
+    row-gap: 2em;
+    grid-template-columns: 1fr;
+    background-color: rgb(232, 227, 215);
+    position: relative;
+}
+
+.book-list ul li .action {
+    display:flex;
+    justify-content: space-between;
+}
+
+.book-list button {
+    background-color: rgb(161, 174, 247);
+    color: white;
+    font-weight: 500;
+    letter-spacing: 1px;
+    border: none;
+    padding: 0.5em;
+    border-radius: 5px;
+    width: 5em;
 }
 
 .book-list article {
-    grid-column: 1 /span 2;
+    margin-block-end: 2em;
 }

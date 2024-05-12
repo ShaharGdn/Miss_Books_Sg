@@ -1,7 +1,7 @@
 .book-details {
     display: grid;
-    padding: 10px;
-    background-color: orange;
+    padding: 2em;
+    background-color: rgb(223, 209, 182);
     margin-block-start: 10px;
 }
 

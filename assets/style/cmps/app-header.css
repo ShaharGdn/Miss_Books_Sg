@@ -1,0 +1,44 @@
+header {
+    display: grid;
+    margin-inline-start: 1em;
+    margin-block-start: 1em;
+    row-gap: 1em;
+    margin: 0;
+}
+
+header nav {
+    --max-width: 980px;
+    --min-margin: 1em;
+
+    display: grid;
+    grid-template-columns:
+        minmax(var(--min-margin), 1fr) minmax(auto, var(--max-width)) minmax(var(--min-margin), 1fr);
+
+    height: 5em;
+    justify-content: space-around;
+    align-items: center;
+    grid-auto-flow: column;
+    margin-block-end: 2em;
+    background-color: rgb(84, 74, 60);
+}
+
+.links {
+    display: grid;
+    grid-auto-flow: column;
+    grid-column: 2;
+    justify-content: start;
+}
+
+nav a {
+    text-decoration: none;
+    font-size: 1.4em;
+    text-align: center;
+    margin-inline-end: 1em;
+    border-radius: 5px;
+    color: rgb(246, 237, 219);
+    padding: 0.3em;
+}
+
+.active {
+    color: rgb(191, 200, 250);
+}

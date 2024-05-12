@@ -47,12 +47,12 @@ export function BookDetails() {
 
     if(isLoading) return <h3>Loading...</h3>
     return <section className="book-details">
-        <h3>Title: {book.title}</h3>
-        <h4>Subtitle: {book.subtitle}</h4>
-        {book.listPrice.isOnSale && <p className="on-sale">on Sale!</p>}
-        <p>{textLengthTags()}</p>
+        <h3>Title: {book.title}</h3><br />
+        <h4>Subtitle: {book.subtitle}</h4><br />
+        {book.listPrice.isOnSale && <p style={{fontWeight: 800}} className="on-sale">on Sale!</p>}
+        <p style={{fontWeight: 800}}>{textLengthTags()}</p>
+        {yearsDiff > 10 && <p style={{fontWeight: 800}} >Vintage</p>}
         <p>By: {book.authors} ,{book.publishedDate}</p>
-        {yearsDiff > 10 && <p>Vintage</p>}
         {yearsDiff < 1 && <p>New</p>}
         <p>Categories: {book.categories.map(category => <span>{category} </span>)}</p>
         <p style={{ color: bookPriceColor() }}><span style={{ color: 'black' }}>Price: </span>{book.price} {book.listPrice.currencyCode}</p>
