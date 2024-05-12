@@ -30,8 +30,12 @@ function query(filterBy = {}) {
             }
 
             if (filterBy.maxPrice) {
-                books = books.filter(book => book.price <= filterBy.maxPrice)
-                // books = books.filter(book => book.listPrice.amount <= filterBy.maxPrice)
+                // books = books.filter(book => book.price <= filterBy.maxPrice)
+                books = books.filter(book => book.listPrice.amount <= filterBy.maxPrice)
+            }
+            if (filterBy.minPrice) {
+                // books = books.filter(book => book.price <= filterBy.maxPrice)
+                books = books.filter(book => book.listPrice.amount >= filterBy.minPrice)
             }
             return books
         })

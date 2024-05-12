@@ -8,6 +8,7 @@ import { bookService } from "../services/book.service.js"
 export function BookEdit() {
     const currRef = useRef(null)
     const [book, setBook] = useState(bookService.getEmptybook())
+    const bookToEdit = { title: book.title, price: book.listPrice.amount }
 
     const params = useParams()
     const navigate = useNavigate()

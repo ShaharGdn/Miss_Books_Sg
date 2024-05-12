@@ -19,7 +19,8 @@ export function BookFilter({ filterBy, onFilter }) {
     return <section className="book-filter">
         <h3>Filter</h3>
 
-        <input onChange={handleChange} autoFocus name="title" type="text" placeholder="Title"/>
-        <input onChange={handleChange} name="maxPrice" type="number" placeholder="Max Price"/>
+        <label htmlFor="title">Title: </label><input id="title" onChange={handleChange} autoFocus name="title" type="text" placeholder="Title"/>
+        <label htmlFor="minPrice">Min Price: </label><input id="minPrice" onChange={handleChange} name="minPrice" type="number" placeholder="Min Price"/>
+        <label htmlFor="maxPrice">Max Price: </label><input id="maxPrice" onChange={handleChange} name="maxPrice" type="number" placeholder="Max Price"/>
     </section>
 }
