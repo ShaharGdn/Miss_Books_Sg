@@ -54,7 +54,6 @@ function remove(bookId) {
 }
 
 function save(book) {
-    console.log('book:', book)
     if (book.id) {
         return storageService.put(BOOK_KEY, book)
     } else {

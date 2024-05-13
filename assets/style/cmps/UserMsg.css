@@ -1,0 +1,27 @@
+.user-msg {
+    position: fixed;
+    top: 62px;
+    right: 1em;
+
+    display: grid;
+    place-items: start center;
+
+    width: max-content;
+    padding: 8px;
+    background-color: lightsteelblue;
+    border-radius: 8px;
+}
+
+.user-msg p {
+    margin: 0;
+}
+
+.success {
+    background-color: darkseagreen;
+}
+
+.error {
+    background-color: orangered;
+    color: white;
+    font-weight: bold;
+}
