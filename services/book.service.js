@@ -13,8 +13,6 @@ export const bookService = {
     _createbooks,
     _createbook,
     getDefaultFilter,
-    getSpeedStats,
-    getVendorStats,
     _setNextPrevBookId,
 }
 // For Debug (easy access from console):

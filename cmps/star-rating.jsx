@@ -1,4 +1,3 @@
-
 export function StarRating({ handleChange, rating }) {
 
     function onSetRating(rate) {
