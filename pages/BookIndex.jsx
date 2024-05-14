@@ -4,8 +4,8 @@ const { Link } = ReactRouterDOM
 
 import { bookService } from "../services/book.service.js"
 
-import { BookList } from "../cmps/BookList.jsx"
-import { BookFilter } from "../cmps/BookFilter.jsx"
+import { BookList } from "../cmps/book-list.jsx"
+import { BookFilter } from "../cmps/book-filter.jsx"
 import { showSuccessMsg } from "../services/event-bus.service.js"
 
 export function BookIndex() {

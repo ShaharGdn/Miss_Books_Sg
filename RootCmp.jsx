@@ -6,7 +6,7 @@ import { About } from "./pages/About.jsx"
 import { BookIndex } from "./pages/BookIndex.jsx"
 import { BookEdit } from "./pages/BookEdit.jsx"
 
-import { AppHeader } from "./cmps/AppHeader.jsx"
+import { AppHeader } from "./cmps/app-header.jsx"
 import { BookDetails } from "./pages/BookDetails.jsx"
 import { UserMsg } from "./cmps/user-msg.jsx"
 

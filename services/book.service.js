@@ -16,11 +16,12 @@ export const bookService = {
     getSpeedStats,
     getVendorStats,
     _setNextPrevBookId,
-    _getBookCountByVendorMap,
 }
 // For Debug (easy access from console):
 window.cs = bookService
 
+
+// get the books from ls then filter by .... using filter. return the books
 function query(filterBy = {}) {
     return storageService.query(BOOK_KEY)
         .then(books => {
@@ -30,17 +31,16 @@ function query(filterBy = {}) {
             }
 
             if (filterBy.maxPrice) {
-                // books = books.filter(book => book.price <= filterBy.maxPrice)
                 books = books.filter(book => book.listPrice.amount <= filterBy.maxPrice)
             }
             if (filterBy.minPrice) {
-                // books = books.filter(book => book.price <= filterBy.maxPrice)
                 books = books.filter(book => book.listPrice.amount >= filterBy.minPrice)
             }
             return books
         })
 }
 
+// using the async service get function to get a specific book and adding next prev on the book obj. return the book
 function get(bookId) {
     return storageService.get(BOOK_KEY, bookId)
         .then(book => {
@@ -49,10 +49,12 @@ function get(bookId) {
         })
 }
 
+// using the storage service remove with the book key and ID
 function remove(bookId) {
     return storageService.remove(BOOK_KEY, bookId)
 }
 
+// depending on whether we have a book.id we will decide if using put or post from storage service 
 function save(book) {
     if (book.id) {
         return storageService.put(BOOK_KEY, book)
@@ -61,6 +63,7 @@ function save(book) {
     }
 }
 
+// an empty book obj template
 function getEmptybook() {
     const book = {
         id: '',
@@ -83,34 +86,12 @@ function getEmptybook() {
     return book
 }
 
+// an empty filter to initialize the filter settings
 function getDefaultFilter(filterBy = { title: '', maxPrice: 0 }) {
     return { title: filterBy.title, maxPrice: filterBy.maxPrice }
 }
 
-function getSpeedStats() {
-    return storageService.query(BOOK_KEY)
-        .then(books => {
-            const bookCountBySpeedMap = _getbookCountBySpeedMap(books)
-            const data = Object.keys(bookCountBySpeedMap).map(speedName => ({ title: speedName, value: bookCountBySpeedMap[speedName] }))
-            return data
-        })
-
-}
-
-function getVendorStats() {
-    return storageService.query(BOOK_KEY)
-        .then(books => {
-            const bookCountByVendorMap = _getbookCountByVendorMap(books)
-            const data = Object.keys(bookCountByVendorMap)
-                .map(vendor =>
-                ({
-                    title: vendor,
-                    value: Math.round((bookCountByVendorMap[vendor] / books.length) * 100)
-                }))
-            return data
-        })
-}
-
+// create 19 random books. save to storage
 function _createbooks() {
     let books = utilService.loadFromStorage(BOOK_KEY)
     if (!books || !books.length) {
@@ -142,6 +123,7 @@ function _createbooks() {
     return books
 }
 
+// create a single book
 function _createbook() {
     const ctgs = ['Love', 'Fiction', 'Poetry', 'Computers', 'Religion']
 
@@ -166,7 +148,7 @@ function _createbook() {
     return book
 }
 
-
+// set next prev book id
 function _setNextPrevBookId(book) {
     return storageService.query(BOOK_KEY).then((books) => {
         const bookIdx = books.findIndex((currBook) => currBook.id === book.id)
@@ -176,23 +158,4 @@ function _setNextPrevBookId(book) {
         book.prevBookId = prevBook.id
         return book
     })
-}
-
-function _getBookCountBySpeedMap(books) {
-    const bookCountBySpeedMap = books.reduce((map, book) => {
-        if (book.maxSpeed < 120) map.slow++
-        else if (book.maxSpeed < 200) map.normal++
-        else map.fast++
-        return map
-    }, { slow: 0, normal: 0, fast: 0 })
-    return bookCountBySpeedMap
-}
-
-function _getBookCountByVendorMap(books) {
-    const bookCountByVendorMap = books.reduce((map, book) => {
-        if (!map[book.vendor]) map[book.vendor] = 0
-        map[book.vendor]++
-        return map
-    }, {})
-    return bookCountByVendorMap
 }

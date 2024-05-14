@@ -19,7 +19,6 @@ export function showUserMsg(msg) {
     eventBusService.emit('user-msg', msg)
 }
 
-
 export function showSuccessMsg(txt, bookId) {
     showUserMsg({ txt, type: 'success', bookId })
 }

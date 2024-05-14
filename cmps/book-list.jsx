@@ -1,6 +1,6 @@
 const { Link } = ReactRouterDOM
 
-import { BookPreview } from "./BookPreview.jsx";
+import { BookPreview } from "./book-preview.jsx";
 
 export function BookList({ books, onRemove }) {
     return <section className="book-list">

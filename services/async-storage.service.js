@@ -1,3 +1,5 @@
+import { utilService } from "./util.service.js"
+
 export const storageService = {
     query,
     get,
@@ -6,11 +8,13 @@ export const storageService = {
     remove,
 }
 
+// gets an entity from the local storage
 function query(entityType, delay = 200) {
     var entities = JSON.parse(localStorage.getItem(entityType)) || []
     return new Promise(resolve => setTimeout(() => resolve(entities), delay))
 }
 
+// gets an specific item from the local storage using query and find
 function get(entityType, entityId) {
     return query(entityType).then(entities => {
         const entity = entities.find(entity => entity.id === entityId)
@@ -19,9 +23,10 @@ function get(entityType, entityId) {
     })
 }
 
+// post a new item to the required entity, break the entity make a new one, add an ID use query to get all the entity and push the new one. save to storage and return the newEntity
 function post(entityType, newEntity) {
     newEntity = {...newEntity}
-    newEntity.id = _makeId()
+    newEntity.id = utilService.makeId()
     return query(entityType).then(entities => {
         entities.push(newEntity)
         _save(entityType, entities)
@@ -29,6 +34,7 @@ function post(entityType, newEntity) {
     })
 }
 
+// update an existing item . using query to get all entity from storage, then finding the item, breaking the updated entity and splicing (replacing) the existing item with the new one using splice. saving to storage. returning the updated entity. 
 function put(entityType, updatedEntity) {
     return query(entityType).then(entities => {
         const idx = entities.findIndex(entity => entity.id === updatedEntity.id)
@@ -36,15 +42,12 @@ function put(entityType, updatedEntity) {
         const entityToUpdate = {...entities[idx], ...updatedEntity}
         entities.splice(idx, 1, entityToUpdate)
         _save(entityType, entities)
-        console.log('updatedEntity:', updatedEntity)
+        // console.log('updatedEntity:', updatedEntity)
         return updatedEntity
     })
 }
 
-function _updatePrice(entity) {
-    entity.listPriceentity.price
-}
-
+// remove, using query to get the books from ls, then using findindex to get the item. then splice without replacing. save to ls
 function remove(entityType, entityId) {
     return query(entityType).then(entities => {
         const idx = entities.findIndex(entity => entity.id === entityId)
@@ -56,15 +59,7 @@ function remove(entityType, entityId) {
 
 // Private functions
 
+// save to ls using set item, and stringify
 function _save(entityType, entities) {
     localStorage.setItem(entityType, JSON.stringify(entities))
-}
-
-function _makeId(length = 5) {
-    var text = ''
-    var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
-    for (var i = 0; i < length; i++) {
-        text += possible.charAt(Math.floor(Math.random() * possible.length))
-    }
-    return text
 }

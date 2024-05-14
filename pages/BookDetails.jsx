@@ -3,7 +3,7 @@ const { useParams, useNavigate } = ReactRouter
 
 const { Link } = ReactRouterDOM
 
-import { LongTxt } from "../cmps/LongTxt.jsx"
+import { LongTxt } from "../cmps/long-txt.jsx"
 import { bookService } from "../services/book.service.js"
 
 export function BookDetails() {
