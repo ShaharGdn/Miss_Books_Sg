@@ -7,9 +7,7 @@ import { bookService } from "../services/book.service.js"
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
 
 export function BookEdit() {
-    const currRef = useRef(null)
     const [book, setBook] = useState(bookService.getEmptybook())
-    const bookToEdit = { title: book.title, price: book.listPrice.amount }
 
     const params = useParams()
     const navigate = useNavigate()
@@ -64,7 +62,7 @@ export function BookEdit() {
     }
 
     return (
-        <dialog ref={currRef} open type="modal" className="bookEdit">
+        <section className="bookEdit">
             <span>{book ? book.title : 'New Book'}</span>
             <form onSubmit={onSave}>
                 <input type="text" name="title" placeholder="Title" value={book.title} onChange={handleChange} />
@@ -76,6 +74,6 @@ export function BookEdit() {
                 <button>Add</button>
             </form>
             <Link to="/book"><button>x</button></Link>
-        </dialog>
+        </section>
     )
 }

@@ -14,6 +14,8 @@ export const bookService = {
     _createbook,
     getDefaultFilter,
     _setNextPrevBookId,
+    removeReview,
+    saveReview,
 }
 // For Debug (easy access from console):
 window.cs = bookService
@@ -65,9 +67,9 @@ function save(book) {
 function getEmptybook() {
     const book = {
         id: '',
-        title : '',
+        title: '',
         subtitle: '',
-        authors : '',
+        authors: '',
         price: '',
         publishedDate: '',
         description: '',
@@ -79,7 +81,8 @@ function getEmptybook() {
             amount: '',
             currencyCode: '',
             isOnSale: Math.random() > 0.7
-        }
+        },
+        reviews: [],
     }
     return book
 }
@@ -102,17 +105,18 @@ function _createbooks() {
                 subtitle: utilService.makeLorem(4),
                 authors: [utilService.makeLorem(1)],
                 publishedDate: utilService.getRandomIntInclusive(1950, 2024),
-                description: utilService.makeLorem(20),
+                description: utilService.makeLorem(50),
                 pageCount: utilService.getRandomIntInclusive(20, 600),
                 categories: [ctgs[utilService.getRandomIntInclusive(0, ctgs.length - 1)]],
                 thumbnail: `http://coding-academy.org/books-photos/${i + 1}.jpg`,
-                language: "en", 
+                language: "en",
                 price: utilService.getRandomIntInclusive(80, 500),
                 listPrice: {
                     amount: utilService.getRandomIntInclusive(80, 500),
                     currencyCode: "EUR",
                     isOnSale: Math.random() > 0.7
-                }
+                },
+                reviews: []
             }
             books.push(book)
         }
@@ -127,11 +131,11 @@ function _createbook() {
 
     const book = {
         id: utilService.makeId(),
-        title : utilService.makeLorem(2),
+        title: utilService.makeLorem(2),
         subtitle: utilService.makeLorem(4),
-        authors : [utilService.makeLorem(1)],
+        authors: [utilService.makeLorem(1)],
         publishedDate: utilService.getRandomIntInclusive(1950, 2024),
-        description: utilService.makeLorem(20),
+        description: utilService.makeLorem(50),
         pageCount: utilService.getRandomIntInclusive(20, 600),
         categories: [ctgs[utilService.getRandomIntInclusive(0, ctgs.length - 1)]],
         thumbnail: `http://coding-academy.org/books-photos/${utilService.getRandomIntInclusive(1, 20)}.jpg`,
@@ -141,7 +145,8 @@ function _createbook() {
             amount: utilService.getRandomIntInclusive(80, 500),
             currencyCode: "EUR",
             isOnSale: Math.random() > 0.7
-        }
+        },
+        reviews: []
     }
     return book
 }
@@ -156,4 +161,42 @@ function _setNextPrevBookId(book) {
         book.prevBookId = prevBook.id
         return book
     })
+}
+
+function saveReview(bookId, reviewToSave) {
+    return query().then(books => {
+        const book = books.find((book) => book.id === bookId)
+        book.reviews ? book.reviews : book.reviews = []
+        const review = _createReview(reviewToSave)
+        book.reviews.unshift(review)
+        _saveBooksToStorage(books)
+        return(review)
+    })
+}
+
+function removeReview(bookId, reviewId) {
+    return query().then(books => {
+        const book = books.find((book) => book.id === bookId)
+        const reviewIdx = book.reviews.findIndex(review => review.id === reviewId)
+        if (reviewIdx !== -1) {
+            book.reviews.splice(reviewIdx, 1)
+            _saveBooksToStorage(books)
+        }
+        return book
+    })
+}
+
+function _createReview(reviewToAdd) {
+    return {
+        id: utilService.makeId(),
+        ...reviewToAdd
+    }
+}
+
+function _saveBooksToStorage(books) {
+    utilService.saveToStorage(BOOK_KEY, books)
+}
+
+function _loadBooksFromStorage() {
+    return utilService.loadFromStorage(BOOK_KEY)
 }

@@ -9,7 +9,7 @@ export function LongTxt({ txt, length = 100 }) {
     }
 
     function getMsg() {
-        return text.length === txt.length ? '...Read less' : '...Read more'
+        return text.length === txt.length ? ' ...Read less' : ' ...Read more'
     }
 
     return <p>

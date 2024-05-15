@@ -8,3 +8,7 @@
 .book-details button {
     justify-self: end;
 }
+
+.read-more {
+    font-weight: 800;
+}
