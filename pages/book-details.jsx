@@ -105,19 +105,20 @@ export function BookDetails() {
 
     if (isLoading) return <h3>Loading...</h3>
     return <section className="book-details">
-        <h3>Title: {title}</h3><br />
-        <h4>Subtitle: {subtitle}</h4><br />
-        <p style={{ fontWeight: 800 }}>{textLengthTags()}</p>
-        <p>By: {authors} ,{publishedDate} {getBookAge()}</p>
-        <p>Categories: {categories.map(category => <span key={utilService.makeId()}>{category} </span>)}</p>
-        <p style={{ color: bookPriceColor() }}>
-            <span style={{ color: 'black' }}>Price: </span>{price}{utilService.getCurrencySign(currencyCode)}
-            {listPrice.isOnSale && <span style={{ fontWeight: 800 }} className="on-sale">on Sale!</span>}
-        </p>
-        
-        <p>Pages: {pageCount}</p>
-        <p>Language: {language}</p>
-        {<LongTxt txt={description} />}
+        <article>
+            <h3>{title}</h3>
+            <p><span className="label">Subtitle: </span>{subtitle}</p>
+            <p style={{ fontWeight: 800 }}>{textLengthTags()}</p>
+            <p><span className="label">By: </span>{authors} ,{publishedDate} {getBookAge()}</p>
+            <p><span className="label">Categories: </span> {categories.map(category => <span key={utilService.makeId()}>{category} </span>)}</p>
+            <p style={{ color: bookPriceColor() }}><span className="label">Price: </span>
+                <span style={{ color: 'black' }}></span>{price}{utilService.getCurrencySign(currencyCode) } 
+                {listPrice.isOnSale && <span className="on-sale"> On Sale!</span>}
+            </p>
+            <p><span className="label">Pages: </span>{pageCount}</p>
+            <p><span className="label">Language:  </span>{language}</p>
+            {<LongTxt txt={description} />}
+        </article>
         <img src={thumbnail} alt="" />
 
         <section className="actions">
