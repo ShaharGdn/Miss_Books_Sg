@@ -20,7 +20,6 @@ export function GoogleBookAdd() {
     if (!books) return
 
     function handleChange({ target }) {
-        console.log('target.value:', target.value)
         setSearchTerm(target.value)
     }
 
@@ -36,7 +35,7 @@ export function GoogleBookAdd() {
             })
     }
 
-    function debounce(func, wait = 1500) {
+    function debounce(func, wait = 5000) {
         console.log('func:', func)
         let timeout
     
@@ -56,8 +55,10 @@ export function GoogleBookAdd() {
             type="search"
             id="search"
             placeholder="Harry Potter"
-            onChange={handleChange} />
+            onChange={debounce((ev)=>handleChange(ev))} />
         {term ? <h1>Results</h1> : <h1>Search Something...</h1>}
         {term && <GoogleBooksList books={books} onChooseBook={onSave} />}
     </section >
 }
+
+
