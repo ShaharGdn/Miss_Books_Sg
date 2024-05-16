@@ -50,10 +50,9 @@ export function BookIndex() {
     }
 
     return <section className="books">
-        {/* <Link to="/book/edit"><button>Add a Book</button></Link> */}
+        <BookFilter filterBy={filterBy} onFilter={onSetFilterBy} />
         <Link to="/book/add"><button>Add a Book</button></Link>
 
-        <BookFilter filterBy={filterBy} onFilter={onSetFilterBy} />
         <BookList books={books} onRemove={removeBook} />
     </section>
 }

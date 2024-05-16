@@ -1,0 +1,17 @@
+.book-filter {
+    display: flex;
+    flex-direction: column;
+    border-radius: 1em;
+    background-color: rgb(232, 227, 215);
+    box-shadow: 3px 3px 11px #00000057;
+    padding: 2em;
+    flex-wrap: wrap;
+}
+
+.book-filter h3 {
+    margin-block-end: 1em;
+}
+
+.filter-by input {
+    margin-inline-end: 1em;
+}

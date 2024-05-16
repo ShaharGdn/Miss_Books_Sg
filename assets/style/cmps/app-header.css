@@ -22,11 +22,20 @@ header nav {
     background-color: rgb(84, 74, 60);
 }
 
+header h1 {
+    grid-row: 1;
+    grid-column: 2;
+    justify-content: start;
+    align-self: center;
+    color: rgb(246, 237, 219)
+}
+
 .links {
     display: grid;
     grid-auto-flow: column;
+    grid-row: 1;
     grid-column: 2;
-    justify-content: start;
+    justify-content: end;
 }
 
 nav a {

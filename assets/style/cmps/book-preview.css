@@ -6,17 +6,17 @@
 }
 
 .book-preview .title {
-    grid-row: 1; /* Title occupies the first row */
-    overflow: hidden; /* Prevents title from overflowing */
-    white-space: nowrap; /* Prevents title from wrapping */
-    text-overflow: ellipsis; /* Show ellipsis if title overflows */
+    grid-row: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .book-preview .content {
-    grid-row: 2; /* Content occupies the second row */
+    grid-row: 2;
 }
 
 .book-preview img {
     margin: 0 auto;
-    max-width: 85%; /* Ensures the image fits its container */
+    max-width: 85%;
 }

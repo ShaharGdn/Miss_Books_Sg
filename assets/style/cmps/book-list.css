@@ -6,15 +6,19 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 10px;
+    row-gap: 1em;
+    column-gap: 1em;
 }
 
 .book-list ul li {
     display: grid;
     padding: 10px;
     column-gap: 2em;
-    row-gap: 2em;
+    row-gap: 1em;
     grid-template-columns: 1fr;
     background-color: rgb(232, 227, 215);
+    border-radius: 1em;
+    box-shadow: 3px 3px 11px #00000057;
     position: relative;
 }
 

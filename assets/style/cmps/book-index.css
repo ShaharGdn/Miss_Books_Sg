@@ -1,0 +1,9 @@
+.books button {
+    background-color: rgb(161, 174, 247);
+    color: white;
+    font-weight: 500;
+    letter-spacing: 1px;
+    border: none;
+    padding: 0.5em;
+    border-radius: 5px;
+}

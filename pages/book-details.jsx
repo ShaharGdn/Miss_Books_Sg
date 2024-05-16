@@ -55,6 +55,8 @@ export function BookDetails() {
         nextBookId,
     } = book
 
+    const { currencyCode, amount } = listPrice
+
     const currYear = (new Date()).getFullYear()
     const yearsDiff = currYear - book.publishedDate
 
@@ -109,7 +111,7 @@ export function BookDetails() {
         <p>By: {authors} ,{publishedDate} {getBookAge()}</p>
         <p>Categories: {categories.map(category => <span key={utilService.makeId()}>{category} </span>)}</p>
         <p style={{ color: bookPriceColor() }}>
-            <span style={{ color: 'black' }}>Price: </span>{price} {listPrice.currencyCode}
+            <span style={{ color: 'black' }}>Price: </span>{price}{utilService.getCurrencySign(currencyCode)}
             {listPrice.isOnSale && <span style={{ fontWeight: 800 }} className="on-sale">on Sale!</span>}
         </p>
         
