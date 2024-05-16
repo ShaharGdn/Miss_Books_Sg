@@ -108,7 +108,11 @@ export function BookDetails() {
         <p style={{ fontWeight: 800 }}>{textLengthTags()}</p>
         <p>By: {authors} ,{publishedDate} {getBookAge()}</p>
         <p>Categories: {categories.map(category => <span key={utilService.makeId()}>{category} </span>)}</p>
-        <p style={{ color: bookPriceColor() }}><span style={{ color: 'black' }}>Price: </span>{price} {listPrice.currencyCode}</p>        {listPrice.isOnSale && <p style={{ fontWeight: 800 }} className="on-sale">on Sale!</p>}
+        <p style={{ color: bookPriceColor() }}>
+            <span style={{ color: 'black' }}>Price: </span>{price} {listPrice.currencyCode}
+            {listPrice.isOnSale && <span style={{ fontWeight: 800 }} className="on-sale">on Sale!</span>}
+        </p>
+        
         <p>Pages: {pageCount}</p>
         <p>Language: {language}</p>
         {<LongTxt txt={description} />}
