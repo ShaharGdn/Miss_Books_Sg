@@ -37,8 +37,21 @@ export function BookIndex() {
             })
     }
 
+    function onSave(book) {
+        googleService.save(book)
+            .then(() => {
+                navigate('/book')
+                showSuccessMsg(`Successfully Added book ${book.id}!`)
+            })
+            .catch((err) => {
+                showErrorMsg(err)
+                navigate('/book')
+            })
+    }
+
     return <section className="books">
-        <Link to="/book/edit"><button>Add a Book</button></Link>
+        {/* <Link to="/book/edit"><button>Add a Book</button></Link> */}
+        <Link to="/book/add"><button>Add a Book</button></Link>
 
         <BookFilter filterBy={filterBy} onFilter={onSetFilterBy} />
         <BookList books={books} onRemove={removeBook} />

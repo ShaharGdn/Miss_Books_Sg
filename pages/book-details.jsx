@@ -8,9 +8,12 @@ import { AddReview } from "../cmps/review-add.jsx"
 import { ReviewList } from "../cmps/review-list.jsx"
 import { bookService } from "../services/book.service.js"
 import { showErrorMsg } from "../services/event-bus.service.js"
+import { googleService } from "../services/google-books.service.js"
 import { utilService } from "../services/util.service.js"
 
 export function BookDetails() {
+    googleService.getGoogleBooks('lala')
+
     const [book, setBook] = useState(null)
     const [isAddReview, setReviewEditor] = useState(false)
     const [isLoading, setIsLoading] = useState(true)

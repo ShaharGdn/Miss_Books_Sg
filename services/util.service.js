@@ -10,6 +10,7 @@ export const utilService = {
     padNum,
     getRandomColor,
     getCurrencySign,
+    debounce
 }
 
 function makeId(length = 6) {
@@ -103,3 +104,16 @@ function getCurrencySign(sign) {
     }
   }
   
+  function debounce(func, wait = 1500) {
+    console.log('func:', func)
+	let timeout
+
+	return function executedFunction(...args) {
+		const later = () => {
+			clearTimeout(timeout)
+			func(...args)
+		}
+		clearTimeout(timeout)
+		timeout = setTimeout(later, wait)
+	}
+}
