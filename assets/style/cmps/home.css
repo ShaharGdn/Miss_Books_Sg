@@ -1,0 +1,13 @@
+.home > * {
+    margin-block-end: 1em;
+}
+
+.home img {
+    max-width: 80%;
+}
+
+.home p {
+    max-width: 80%; 
+    overflow-wrap: break-word;
+    margin-block-end: 1em;
+}
