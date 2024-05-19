@@ -38,7 +38,7 @@ export function GoogleBookAdd() {
     function debounce(func, wait = 5000) {
         console.log('func:', func)
         let timeout
-    
+
         return function executedFunction(...args) {
             const later = () => {
                 clearTimeout(timeout)
@@ -49,16 +49,19 @@ export function GoogleBookAdd() {
         }
     }
 
-    return <section>
-        <label htmlFor="search">Search: </label><input
-            autoFocus={true}
-            type="search"
-            id="search"
-            placeholder="Harry Potter"
-            onChange={debounce((ev)=>handleChange(ev))} />
-        {term ? <h1>Results</h1> : <h1>Search Something...</h1>}
+    return <section className="google-add-book">
+        <h1>Add A Book From Google API</h1>
+        <section className="google-search">
+            <label htmlFor="search">Search: </label><input
+                autoFocus={true}
+                type="search"
+                id="search"
+                placeholder="Harry Potter"
+                onChange={debounce((ev) => handleChange(ev))} />
+        </section >
+        {!term && <h2>Search Something...</h2>}
         {term && <GoogleBooksList books={books} onChooseBook={onSave} />}
-    </section >
+    </section>
 }
 
 

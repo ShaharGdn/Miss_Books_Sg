@@ -1,7 +1,7 @@
 import { BookPreview } from "./book-preview.jsx"
 
 export function GoogleBooksList({ books, onChooseBook }) {
-    return <section className="book-list">
+    return <section className="book-list google">
         <ul>
             {books.map(book =>
                 <li key={book.id}>
