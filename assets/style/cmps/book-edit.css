@@ -1,0 +1,47 @@
+.book-edit {
+    display: flex;
+    flex-direction: column;
+    border-radius: 1em;
+    background-color: rgb(232, 227, 215);
+    box-shadow: 3px 3px 11px #00000057;
+    padding: 2em;
+    flex-wrap: wrap;
+}
+
+.book-edit form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.book-edit h3 {
+    margin-block-end: 1em;
+}
+
+.book-edit .title {
+    text-transform: capitalize;
+    font-size: 1.5em;
+    margin-block-end: 1em;
+}
+
+.book-edit input{
+    text-transform: capitalize;
+}
+
+.book-edit input {
+    margin-inline-end: 1em;
+    padding: 0.5em;
+    border-radius: 0.4em;
+    border: none;
+}
+
+.book-edit button {
+    background-color: rgb(161, 174, 247);
+    color: white;
+    font-weight: 500;
+    letter-spacing: 1px;
+    border: none;
+    padding: 0.5em;
+    border-radius: 5px;
+    width: 5em;
+}

@@ -62,18 +62,20 @@ export function BookEdit() {
     }
 
     return (
-        <section className="bookEdit">
-            <span>{book ? book.title : 'New Book'}</span>
+        <section className="book-edit">
+            <span className="title">{book ? 'Edit: ' + book.title : 'New Book'}</span>
             <form onSubmit={onSave}>
-                <input type="text" name="title" placeholder="Title" value={book.title} onChange={handleChange} />
-                <input type="number" name="price" placeholder="Price" value={book.price} onChange={handleChange} />
-                <input type="text" name="authors" placeholder="Author" value={book.authors} onChange={handleChange} />
-                <input type="number" name="pageCount" placeholder="Pages" value={book.pageCount} onChange={handleChange} />
-                <input type="number" name="publishedDate" placeholder="Published (YYYY)" value={book.publishedDate} onChange={handleChange} />
-                <input type="text" name="language" placeholder="Language" value={book.language} onChange={handleChange} />
-                <button>Add</button>
+                <label htmlFor="title">Title: </label><input id="title" type="text" name="title" placeholder="Title" value={book.title} onChange={handleChange} />
+                <label htmlFor="price">Price: </label><input type="number" id="price" name="price" placeholder="Price" value={book.price} onChange={handleChange} />
+                <label htmlFor="authors">Authors: </label><input type="text" id="authors" name="authors" placeholder="Author" value={book.authors} onChange={handleChange} />
+                <label htmlFor="pages">Pages: </label><input type="number" id="pages" name="pageCount" placeholder="Pages" value={book.pageCount} onChange={handleChange} />
+                <label htmlFor="year">Published: </label><input type="number" id="year" name="publishedDate" placeholder="Published (YYYY)" value={book.publishedDate} onChange={handleChange} />
+                <label htmlFor="lang">Language: </label><input type="text" id="lang" name="language" placeholder="Language" value={book.language} onChange={handleChange} />
+                <section className="actions">
+                    <button>Save</button>
+                    <Link to="/book"><button>Exit</button></Link>
+                </section>
             </form>
-            <Link to="/book"><button>x</button></Link>
         </section>
     )
 }
