@@ -6,6 +6,7 @@
     box-shadow: 3px 3px 11px #00000057;
     padding: 2em;
     flex-wrap: wrap;
+    color: rgb(47, 36, 36);
 }
 
 .book-filter h3 {
@@ -14,4 +15,8 @@
 
 .filter-by input {
     margin-inline-end: 1em;
+    padding: 0.5em;
+    border-radius: 0.4em;
+    border: none;
+    margin-block-end: 0.7em;
 }

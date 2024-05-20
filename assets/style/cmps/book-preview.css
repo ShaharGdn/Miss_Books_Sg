@@ -3,6 +3,7 @@
     display: grid;
     grid-template-rows: auto 1fr; /* First row for title, second row for content */
     gap: 10px; /* Add gap between rows */
+    color: rgb(47, 36, 36);
 }
 
 .book-preview .title {
@@ -19,4 +20,13 @@
 .book-preview img {
     margin: 0 auto;
     max-width: 85%;
+}
+
+.book-preview h3 {
+    text-transform: capitalize;
+
+}
+
+.book-preview p span {
+    font-weight: 600;
 }

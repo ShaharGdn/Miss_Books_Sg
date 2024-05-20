@@ -30,7 +30,11 @@ function _createbooks(books) {
     const booksList = books.map((book) => {
         const { id, volumeInfo } = book
         const { authors, categories, description, imageLinks, language, publishedDate, pageCount, title, subtitle } = volumeInfo
-        const { thumbnail } = imageLinks
+        
+        if (imageLinks) {
+            var { thumbnail } = imageLinks
+        }
+
         return {
             id,
             title,
