@@ -104,12 +104,13 @@ export function BookDetails() {
     }
 
     if (isLoading) return <h3>Loading...</h3>
+
     return <section className="book-details">
         <article>
             <h3>{title}</h3>
-            <p><span className="label">Subtitle: </span>{subtitle}</p>
+            <p className="capital"><span className="label">Subtitle: </span>{subtitle}</p>
             <p style={{ fontWeight: 800 }}>{textLengthTags()}</p>
-            <p><span className="label">By: </span>{authors} ,{publishedDate} {getBookAge()}</p>
+            <p className="capital"><span className="label">By: </span>{authors} ,{publishedDate} {getBookAge()}</p>
             <p><span className="label">Categories: </span> {categories.map(category => <span key={utilService.makeId()}>{category} </span>)}</p>
             <p style={{ color: bookPriceColor() }}><span className="label">Price: </span>
                 <span style={{ color: 'black' }}></span>{price}{utilService.getCurrencySign(currencyCode) } 
@@ -124,10 +125,10 @@ export function BookDetails() {
         <section className="actions">
             <Link to={`/book/${prevBookId}`}><button>Prev</button></Link>
             <Link to={`/book/${nextBookId}`}><button>Next</button></Link>
-            <Link to="/book"><button>x</button></Link>
 
             <button onClick={onToggleReviewModal}>Add a review</button>
             {isAddReview && < AddReview onSaveReview={onSaveReview} onToggleReviewModal={onToggleReviewModal} />}
+            <Link to="/book"><button>x</button></Link>
         </section>
         <div className='review-container'>
             <ReviewList

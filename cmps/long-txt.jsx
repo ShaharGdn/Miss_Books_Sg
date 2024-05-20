@@ -13,8 +13,13 @@ export function LongTxt({ txt, length = 100 }) {
     }
 
     return <p>
-        <span>Description: </span>
-        {text}
+        <span style={{ fontWeight: 800 }}>Description: </span>
+        <span>
+            <span style={{ textTransform: 'lowercase' }}>
+                <span className="upper">{text.split(' ')[0]} </span>
+            {text.substring(text.indexOf(' ') + 1)}
+            </span>
+        </span>
         <span className='read-more' onClick={getFullTxt}>{getMsg()}</span>
     </p>
 }

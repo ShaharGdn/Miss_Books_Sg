@@ -7,6 +7,7 @@
     background-color: rgb(232, 227, 215);
     box-shadow: 3px 3px 11px #00000057;
     margin-block-start: 10px;
+    color: rgb(47, 36, 36);
 }
 
 .book-details > * {
@@ -67,4 +68,21 @@
 .book-details .on-sale {
     font-weight: 800;
     color: black;
+}
+
+.book-details .capital {
+    text-transform: capitalize;
+}
+
+.upper {
+    text-transform: capitalize; 
+}
+
+.book-details article {
+    margin-block-end: 2em;
+    max-width: max-content;
+}
+
+article h3 {
+    max-width: max-content;
 }
