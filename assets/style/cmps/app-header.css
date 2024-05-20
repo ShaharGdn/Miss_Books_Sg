@@ -22,12 +22,15 @@ header nav {
     background-color: rgb(84, 74, 60);
 }
 
-header h1 {
+header .logo {
     grid-row: 1;
     grid-column: 2;
+    cursor: pointer;
     justify-content: start;
     align-self: center;
-    color: rgb(246, 237, 219)
+    color: rgb(246, 237, 219);
+    z-index: 1;
+    width: max-content;
 }
 
 .links {
